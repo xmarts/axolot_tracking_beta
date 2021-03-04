@@ -1,0 +1,175 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="axo_zone_tree_view">
+      <field name="name">axo.zone,tree.view</field>
+      <field name="model">axo.zone</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="type"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="axo_tracking_type_tree_view">
+      <field name="name">axo.tracking.type,tree.view</field>
+      <field name="model">axo.tracking.type</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+   
+    <record model="ir.ui.view" id="axo_rol_type_tree_view">
+      <field name="name">axo rol type tree view</field>
+      <field name="model">axo.rol.type</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="cod"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="axo_date_visit_tree_view">
+      <field name="name">axo date visit tree view</field>
+      <field name="model">axo.date.visit</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="time" widget="float_time"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tr_employee_form_view">
+      <field name="name">tr employee tree view</field>
+      <field name="model">tr.employee</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="password" widget="password"/>
+          <field name="rol_type" widget="daterange"/>
+          <field name="tracking_hours"/>
+          <field name="monitoring"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_form_view">
+      <field name="name">partner tree view</field>
+      <field name="model">partner</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="zone" />
+          <field name="zone2" />
+          <field name="zone3" />
+          <field name="zone4" />
+          <!--       <field name="new_route"/>
+        -->
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="axo_zone_action">
+      <field name="name">axo zone</field>
+      <field name="res_model">axo.zone</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="axo_tracking_type_action">
+      <field name="name">axo tracking type</field>
+      <field name="res_model">axo.tracking.type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="axo_rol_type_action">
+      <field name="name">axo rol type</field>
+      <field name="res_model">axo.rol.type</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="axo_date_visit_action">
+      <field name="name">axo date visit</field>
+      <field name="res_model">axo.date.visit</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="tr_employee_action">
+      <field name="name">employee</field>
+      <field name="res_model">tr.employee</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="partner_action">
+      <field name="name">partner</field>
+      <field name="res_model">partner</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="axo_tracking.action_server">
+      <field name="name">axo_tracking server</field>
+      <field name="model_id" ref="model_axo_tracking_axo_tracking"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <!-- menu categories -->
+
+    <menuitem 
+      name="Menu 1" 
+      id="axo_zone_menu_1" 
+      parent="project.menu_main_pm"/>
+
+
+    <!-- actions -->
+
+    <menuitem name="axo_zone" 
+    id="axo_zone_menu_1_list" 
+    parent="axo_zone_menu_1"
+    action="axo_zone_action"/>
+
+    <menuitem name="axo tracking type" 
+    id="axo_tracking_type_menu_1_list" 
+    parent="axo_zone_menu_1"
+    action="axo_tracking_type_action"/>
+  
+    <menuitem name="axo rol type" 
+    id="axo_rol_type_menu_1_list" 
+    parent="axo_zone_menu_1"
+    sequence="3"
+    action="axo_rol_type_action"/>
+    
+    <menuitem name="axo date visit" 
+    id="axo_date_visit_menu_1_list" 
+    parent="axo_zone_menu_1"
+    action="axo_date_visit_action"/>
+
+    <menuitem name="employee" 
+    id="tr_employee_menu_1_list" 
+    parent="axo_zone_menu_1"
+    action="tr_employee_action"/>
+
+    <menuitem name="partner" 
+    id="partner_menu_1_list" 
+    parent="axo_zone_menu_1"
+    action="partner_action"/>
+   <!--
+    <menuitem name="Server to list" id="axo_tracking" parent="axo_tracking.menu_2"
+              action="axo_tracking.action_server"/>
+-->
+  </data>
+</odoo>
