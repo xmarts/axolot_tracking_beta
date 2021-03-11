@@ -11,7 +11,7 @@ class axo_tracking_log(models.Model):
           
   user_id = fields.Many2one("hr.employee",string= "empleado",readonly=False,index=True)
 
-  route_order_id = fields.Many2one("axo.route.order",string="Route Order")
+  route_order_id = fields.Many2one("project.task",string="Route Order")
 
 class trackingemployee(models.Model):
   _name = "tr.employee"

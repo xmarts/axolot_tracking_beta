@@ -1,129 +1,54 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-
-    <record model="ir.ui.view" id="axo_route_order_tree_view">
-      <field name="name">axo route order tree view</field>
-      <field name="model">axo.route.order</field>
+    
+    
+    
+    <record model="ir.ui.view" id="inherit_project_tracking_tree_view">
+      <field name="name">project.task.form</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="project.view_task_form2"/>
       <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="partner_id"/> 
-          <field name="priority"/>
-          <field name="employee_id"/>
-          <field name="planened_date_begin"/>
-        </tree>
+        <xpath expr="//field[@name='priority']" position="replace">
+          <field name="priority_" widget="priority"/>
+        </xpath>
+ <!--       <xpath expr="//field[@name='stage_id']" position="replace">
+          <field name="stage" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
+        </xpath>  -->
       </field>
     </record>
-
-    <record model="ir.ui.view" id="axo_route_order_form_view">
-      <field name="name">axo route order formview</field>
-      <field name="model">axo.route.order</field>
+   
+    <record model="ir.ui.view" id="project_tracking_map_view">
+      <field name="name">map views</field>
+      <field name="model">project.task</field>
       <field name="arch" type="xml">
-        <form>
-          <sheet>
-            <group>
-              <field name="name"/>
-              <field name="priority" widget="priority"/>
-              <field name="partner_id"/>
-              <field name="partner_shipping_id"/>
-              <field name="planened_date_begin"/>
-              <field name="planned_date_real"/>
-              <field name="type_id" widget="statusbar" clickable="true"/>
-              <field name="tracking_tag_id" widget="many2many_tags"/>
-              <field name="employee_id"/>
-            </group>
-         </sheet>
-        </form>
+        <map res_partner="partner_id" default_order="planned_date_begin" routing="true">
+          <marker-popup>
+            <field name="name" string="Task"/>
+            <field name="partner_id" string="Customer"/>
+            <field name="partner_street" string="Address"/>
+            <field name="partner_zip" string=""/>
+            <field name="partner_city" string=""/>
+          </marker-popup>
+        </map>
       </field>
-    </record>
-
-    <record model="ir.ui.view" id="axo_route_order_pivot_view">
-      <field name="name">axo.route.order.pivot.view</field>
-      <field name="model">axo.route.order</field>
-      <field name="arch" type="xml">
-       <pivot>
-          <field name="priority"/>
-          <field name="partner_id"/>
-          <field name="planened_date_begin"/>
-          <field name="planned_date_real" />
-          <field name="type_id"/>
-          <field name="tracking_tag_id"/>
-          <field name="employee_id"/>  
-       </pivot>
-      </field>
-    </record>
-
-    <record model="ir.ui.view" id="axo_route_order_calendar_view">
-      <field name="name">axo route order calendar view</field>
-      <field name="model">axo.route.order</field>
-      <field name="arch" type="xml">
-        <calendar date_start="request_date" >
-          <field name="name"/>
-            <field name="priority"/>
-            <field name="partner_id"/>
-            <field name="planened_date_begin"/>
-            <field name="planned_date_real"/>
-            <field name="type_id" />
-            <field name="tracking_tag_id"/>
-            <field name="employee_id"/>          
-        </calendar>
-      </field>
-    </record>
-
-
-    <record id="axo_route_order_search" model="ir.ui.view">
-        <field name="name">axo.route.search</field>
-        <field name="model">axo.route.order</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-                <field name="partner_id"/>
-            </search>
-        </field>
     </record>
 
     <!-- actions opening views on models -->
-
-    <record model="ir.actions.act_window" id="axo_route_order_action">
-      <field name="name">axo.route.order</field>
-      <field name="res_model">axo.route.order</field>
-      <field name="view_mode">tree,form</field>
+    <record model="ir.actions.act_window" id="project_tracking_map_action">
+      <field name="name">project tracking map</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">map</field>
     </record>
 
-
-
-    <record model="ir.actions.act_window" id="axo_route_order_pivot_action">
-      <field name="name">axo route order pivot</field>
-      <field name="res_model">axo.route.order</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="view_mode">pivot</field>
-    </record>
     
-    <record model="ir.actions.act_window" id="axo_route_order_calendar_action">
-      <field name="name">axo route order calendar</field>
-      <field name="res_model">axo.route.order</field>
-      <field name="type">ir.actions.act_window</field>
-      <field name="view_mode">calendar</field>
-    </record>
 
     <!-- actions -->
-
-    <menuitem name="route order" id="axo_route_order_menu_1_list"
+    <menuitem name="project tracking map" 
+    id="project_tracking_menu_1_map" 
     parent="axo_zone_menu_1"
-    action="axo_route_order_action"/>
-    
+    action="project_tracking_map_action"/>
 
-    
-    <menuitem name="pivot" 
-    id="axo_route_order_pivot" 
-    parent="axo_zone_menu_1"          
-    action="axo_route_order_pivot_action"/>
-    
-    <menuitem name="calendar" 
-    id="axo_route_order_calendar" 
-    parent="axo_zone_menu_1"          
-    action="axo_route_order_calendar_action"/>
    
    <!--
     <menuitem name="Server to list" id="axo_tracking" parent="axo_tracking.menu_2"

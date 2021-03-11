@@ -1,6 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_axo_zone,axo_tracking.axo_zone,model_axo_zone,base.group_user,1,1,1,1
-access_axo_route_order,axo_route_order,model_axo_route_order,base.group_user,1,1,1,1
 access_axo_date_visit,axo_date_visit,model_axo_date_visit,base.group_user,1,1,1,1
 access_axo_tracking_log,axo_tracking_log,model_axo_tracking_log,base.group_user,1,1,1,1
 access_axo_tracking_tag,axo_tracking_tag,model_axo_tracking_tag,base.group_user,1,1,1,1
